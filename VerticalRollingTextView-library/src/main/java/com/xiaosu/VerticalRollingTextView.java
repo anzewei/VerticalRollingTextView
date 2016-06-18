@@ -123,8 +123,11 @@ public class VerticalRollingTextView extends View {
      * 停止转动,界面不可见的时候调用
      */
     public void stop() {
-        isRunning = false;
         removeCallbacks(mRollingTask);
+        if (isRunning()) {
+            mAnimation.cancel();
+        }
+        isRunning = false;
     }
 
     Runnable mRollingTask = new Runnable() {
